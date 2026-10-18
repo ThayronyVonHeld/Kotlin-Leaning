@@ -165,7 +165,7 @@ println(resultado) // Imprime: Aprovado
 | `>=` | Maior ou igual a | `nota >= 10` |
 | `<=` | Menor ou igual a | `idade <= 18` |
 | `&&` | **E** lógico (ambas verdadeiras) | `idade >= 18 && idade < 65` |
-| `||` | **Ou** lógico (pelo menos uma verdadeira) | `dia == 6 || dia == 7` |
+| `\|\|` | **Ou** lógico (pelo menos uma verdadeira) | `dia == 6 || dia == 7` |
 | `!` | **Negação** lógica | `!temCartao` |
 
 > 💡 **Boa Prática**: Não confundas `=` (atribuição de valor a uma variável, ex: `val a = 5`) com `==` (comparação de igualdade, ex: `if (a == 5)`).
