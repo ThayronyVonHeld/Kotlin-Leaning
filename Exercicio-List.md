@@ -4,8 +4,6 @@
 
 1. **Boas-Vindas e Tipos:** Escreva um programa que leia o nome e o salário de um funcionário e imprima uma mensagem usando *String Templates*.
 * *Ex:* `O funcionário $nome tem um salário de R$$salario.`
-
-
 2. **Calculadora Simples:** Leia dois números reais (`Double`) e mostre a soma, subtração, multiplicação e a média entre eles.
 3. **Conversor de Medidas:** Leia uma distância em metros e mostre os valores em Quilômetros e Centímetros.
 4. **Descontos e Reajustes:** Crie um programa que leia o preço de um produto e o salário de um funcionário. Mostre o preço do produto com 5% de desconto e o salário com 15% de aumento.
