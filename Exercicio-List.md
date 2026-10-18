@@ -13,7 +13,7 @@
 
 *Foco: Condicionais booleanas, `if` como expressão e a poderosa estrutura `when` do Kotlin.*
 
-6. **Par ou Ímpar:** Leia um número e diga se é par ou ímpar. *Dica: Tente usar o `if` como expressão: `val resultado = if (num % 2 == 0) "Par" else "Ímpar"*`.
+6. **Par ou Ímpar:** Leia um número e diga se é par ou ímpar. *Dica: Tente usar o `if` como expressão: 
 7. **Radar de Velocidade:** Pergunte a velocidade de um carro. Se passar de 80Km/h, mostre que foi multado e o valor (R$5 por cada Km acima do limite).
 8. **Alistamento Militar:** Leia o ano de nascimento de uma pessoa. Mostre a sua idade e se ela: ainda vai se alistar (quantos anos faltam), se é o ano de se alistar, ou se já passou do tempo.
 9. **Calculadora de IMC (Uso do `when`):** Leia o peso e a altura, calcule o IMC (`peso / altura²`) e use a estrutura `when` para classificar:

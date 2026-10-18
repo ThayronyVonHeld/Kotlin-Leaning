@@ -295,6 +295,5 @@ Pratica o que aprendeste tentando resolver os seguintes desafios sem olhar imedi
 * **50 a 74**: "Grau C"
 * **0 a 49**: "Grau D"
 
-6. **Valores fora (utilizando `!in`)**: "Valor Inválido"
 🔥 **Desafio Final (Calculadora Simples):**
-Solicita dois números e um símbolo de operação (+, -, *, /) como `String`. Utiliza o `when` para avaliar o símbolo digitado, realiza o cálculo matemático correspondente e imprime o resultado. Não te esqueças de tratar o caso de divisão por zero (usando `.toIntOrNull()`)!
+Solicita dois números e um símbolo de operação (+, -, *, /) como `String`. Utiliza o `when` para avaliar o símbolo digitado, realiza o cálculo matemático correspondente e imprime o resultado. Não te esqueças de tratar o caso de divisão por zero (pode utilizar `.toIntOrNull()`)!
