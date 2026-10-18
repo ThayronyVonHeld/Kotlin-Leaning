@@ -151,6 +151,115 @@ val resultado = when {
 println(resultado) // Imprime: Aprovado
 
 ```
+---
+## 📏 Intervalos (*Ranges*) com `..`, `in` e `!in`
+
+Em Kotlin, podemos criar intervalos para verificar rapidamente se um valor está dentro de uma determinada sequência, evitando escrever condições muito extensas.
+
+| Operador | Significado | Exemplo Prático |
+| --- | --- | --- |
+| `..` | **Intervalo Inclusivo**: Inclui o valor inicial e o final. | `1..10` (Vai de 1 até 10, incluindo ambos) |
+| `..<` | **Intervalo Exclusivo**: Inclui o início, mas exclui o fim. | `0..<10` (Vai de 0 a 9) |
+| `in` | **Contido em**: Verifica se o valor *pertence* ao intervalo. | `idade in 18..65` |
+| `!in` | **Não contido em**: Verifica se o valor *não pertence*. | `nota !in 0..20` |
+
+### O Operador `in` (Dentro do intervalo)
+
+```kotlin
+val idade = 20
+
+if (idade in 18..65) {
+    println("Idade dentro do intervalo.")
+} else {
+    println("Idade fora do intervalo.")
+}
+
+```
+
+### O Operador `!in` (Fora do intervalo)
+
+```kotlin
+val nota = 25
+
+if (nota !in 0..20) {
+    println("Nota inválida.") // Executa porque 25 não está entre 0 e 20
+}
+
+```
+
+---
+
+## 🎯 Intervalos no `when`
+
+Os intervalos tornam-se incrivelmente poderosos quando combinados com a estrutura `when`. Em vez de fazer múltiplos `if / else if`, o código fica limpo e legível:
+
+```kotlin
+val nota = 15
+
+when (nota) {
+    in 18..20 -> println("Excelente")
+    in 10..17 -> println("Aprovado")
+    in 0..9 -> println("Reprovado")
+    else -> println("Nota inválida")
+}
+
+```
+
+---
+
+## ✂️ A Função `trim()`
+
+Quando lidamos com `readln()`, é muito comum o utilizador digitar espaços acidentais antes ou depois da palavra (ex: `"  Ana   "`). A função `trim()` remove esses espaços em branco **exteriores**.
+
+```kotlin
+val nome = "   Ana   "
+println(nome.trim()) // Resultado: "Ana"
+
+```
+
+> ⚠️ **Atenção**: O `trim()` **não** remove os espaços interiores (entre palavras). Portanto, `"Ana Silva".trim()` continua a ser exatament `"Ana Silva"`.
+
+### Utilização com Condicionais (Validação Segura)
+
+A função `trim()` não altera a variável original, ela devolve uma nova `String` formatada. Por isso, aplicamos a função diretamente na leitura:
+
+```kotlin
+print("Queres continuar? ")
+val resposta = readln().trim()
+
+if (resposta == "sim") {
+    println("Operação confirmada.")
+}
+
+```
+
+*Se o utilizador digitar `"  sim  "`, o `trim()` limpa os espaços e a condição funciona perfeitamente!*
+
+---
+
+## 🔗 Encadeamento de Métodos (Method Chaining)
+
+Para garantir validações ainda mais à prova de erros, podemos combinar (encadear) múltiplas funções. Por exemplo, juntar o `trim()` com o `lowercase()` (que transforma todo o texto em minúsculas).
+
+```mermaid
+flowchart LR
+    A["Entrada: '  SIM  '"] -->|1. trim| B["'SIM'"]
+    B -->|2. lowercase| C["'sim'"]
+    C -->|3. Validação| D{"É igual a 'sim'?"}
+
+```
+
+```kotlin
+print("Confirmar operação? (sim/não): ")
+val resposta = readln().trim().lowercase()
+
+if (resposta == "sim") {
+    println("Operação confirmada.")
+}
+
+```
+
+*Assim, o utilizador pode digitar `" SIM "`, `"Sim"`, ou `"  sIm  "`, e o programa reconhecerá sempre corretamente!*
 
 ---
 
@@ -180,6 +289,12 @@ Pratica o que aprendeste tentando resolver os seguintes desafios sem olhar imedi
 2. **Classificação de uma Nota:** Solicita uma nota (0-20) e apresenta: "Excelente" (>= 18), "Aprovado" (10-17) ou "Reprovado" (< 10).
 3. **Dia da Semana:** Solicita um número (1-7) e utiliza o `when` para apresentar o dia correspondente. Trata as entradas inválidas com o bloco `else`.
 4. **Expressão Condicional:** Lê dois números inteiros e utiliza um `if` como *expressão* para guardar numa nova variável chamada `maior` qual o maior dos dois números, imprimindo-a no final.
+5. Utilizando o `when` e **intervalos (`in`)**, devolve a seguinte análise da classificação:
+* **90 a 100**: "Grau A"
+* **75 a 89**: "Grau B"
+* **50 a 74**: "Grau C"
+* **0 a 49**: "Grau D"
 
+6. **Valores fora (utilizando `!in`)**: "Valor Inválido"
 🔥 **Desafio Final (Calculadora Simples):**
-Solicita dois números e um símbolo de operação (+, -, *, /) como `String`. Utiliza o `when` para avaliar o símbolo digitado, realiza o cálculo matemático correspondente e imprime o resultado. Não te esqueças de tratar o caso de divisão por zero!
+Solicita dois números e um símbolo de operação (+, -, *, /) como `String`. Utiliza o `when` para avaliar o símbolo digitado, realiza o cálculo matemático correspondente e imprime o resultado. Não te esqueças de tratar o caso de divisão por zero (usando `.toIntOrNull()`)!
