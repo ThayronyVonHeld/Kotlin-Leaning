@@ -35,7 +35,27 @@ val words = listOf(
  * @param s A string a verificar
  * @return true se não houver caracteres repetidos, false caso contrário
  */
-fun noRepeats(s: String): Boolean = true
+fun noRepeats(s: String): Boolean{
+    var check: Boolean
+    val iterador = s.indices
+    check = true
+
+    for (i in iterador){
+        var teste = s[i]
+        for (j in iterador ){
+            s[j]
+            if (teste == s[j]){
+                check = false
+                break
+            }
+        }
+
+        }
+
+
+    return check
+}
+
 
 
 /**
@@ -46,7 +66,7 @@ fun noRepeats(s: String): Boolean = true
 fun allCorrect(result: String): Boolean{
 
     var verificador: Boolean
-    var tamanho = result.indices
+    val tamanho = result.indices
 
     verificador = true
 
@@ -58,11 +78,6 @@ fun allCorrect(result: String): Boolean{
 
     return verificador
 }
-
-
-
-
-
 /**
  * Lê uma palavra introduzida pelo utilizador convertida para maiúsculas.
  * Só retorna quando a palavra lida tem o comprimento correto
