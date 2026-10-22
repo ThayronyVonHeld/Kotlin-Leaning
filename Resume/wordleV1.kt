@@ -5,7 +5,7 @@ const val CORRECT = '+'
 const val SWAPPED = '#'
 
 fun main() {
-    val secret = words.random() // words.filter{ noRepeats(it) }.random()
+    val secret = words.filter{ noRepeats(it) }.random() //words.random()
     println("Adivinhar uma palavra com ${secret.length} letras em $MAX_ATTEMPTS tentativas.")
     var attempts = 1
     do {
@@ -35,15 +35,45 @@ val words = listOf(
  * @param s A string a verificar
  * @return true se não houver caracteres repetidos, false caso contrário
  */
-fun noRepeats(s: String): Boolean = true
+fun noRepeats(s: String): Boolean{
+    var check: Boolean
+    val iterador = s.indices
+    check = true
+
+    for (i in iterador){
+        var teste = s[i]
+        for (j in iterador ){
+            if (teste == s[j] && i != j){
+                check = false
+                break
+            }
+        }
+    }
+    return check
+}
+
+
 
 /**
  * Verifica se todos os caracteres da string result são iguais a CORRECT
  * @param result A string a verificar
  * @return true se todos os caracteres forem iguais a CORRECT, false caso contrário
  */
-fun allCorrect(result: String): Boolean = false
+fun allCorrect(result: String): Boolean{
 
+    var verificador: Boolean
+    val tamanho = result.indices
+
+    verificador = true
+
+    for (i in tamanho){
+        if (result[i] != CORRECT) {
+            verificador = false
+            break }
+    }
+
+    return verificador
+}
 /**
  * Lê uma palavra introduzida pelo utilizador convertida para maiúsculas.
  * Só retorna quando a palavra lida tem o comprimento correto
@@ -53,7 +83,21 @@ fun allCorrect(result: String): Boolean = false
  * @param length O comprimento da palavra a ler
  * @return A palavra lida em maiúsculas
  */
-fun readGuess(length: Int): String = "abcde"
+fun readGuess(length: Int): String {
+    var palavrafinal: String
+
+    do {
+        println("Palavra: ")
+        val s = readln()
+        palavrafinal = s.uppercase();
+
+        if (palavrafinal.length != length) {
+            println("Palara não aceita, tente novamente com uma palavra de até $length letras") }
+
+    } while (palavrafinal.length != length)
+
+    return palavrafinal
+}
 
 /**
  * Obtém o resultado da tentativa com base na palavra secreta e na tentativa do utilizador
@@ -62,4 +106,20 @@ fun readGuess(length: Int): String = "abcde"
  * @return A string do resultado com os caracteres CORRECT, WRONG e SWAPPED
  * Exemplo: getResult("CARRO", "CRAVO") == "+##_+"
  */
-fun getResult(secret: String, guess: String): String = "+___#"
+fun getResult(secret: String, guess: String): String {
+
+    var res = ""
+    var vef = guess.indices
+
+    for (i in vef){
+        if (secret[i] == guess[i]){
+            res += CORRECT
+        } else if (guess[i] in secret) {
+            res += SWAPPED
+        }
+        else {
+            res += WRONG
+        }
+    }
+    return res
+}
