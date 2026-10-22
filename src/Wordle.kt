@@ -65,7 +65,7 @@ fun readGuess(length: Int): String {
     var palavrafinal: String
 
     do {
-       println("Palavra: ")
+       print("Palavra: ")
        val s = readln()
        palavrafinal = s.uppercase();
 
