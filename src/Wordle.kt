@@ -1,11 +1,10 @@
-
 const val MAX_ATTEMPTS = 6
 const val WRONG = '_'
 const val CORRECT = '+'
 const val SWAPPED = '#'
 
 fun main() {
-    val secret = words.random()
+    val secret = words.random() // words.filter{ noRepeats(it) }.random()
     println("Adivinhar uma palavra com ${secret.length} letras em $MAX_ATTEMPTS tentativas.")
     var attempts = 1
     do {
@@ -30,77 +29,49 @@ val words = listOf(
     "GENTE", "GRUPO", "JOVEM", "MASSA", "NOITE", "PAPEL", "RAPAZ", "TERRA"
 )
 
-fun noRepeats(s: String): Boolean{
-    var check = true
-    val iterador = s.indices
-
-    for (i in iterador){
-        var teste = s[i]
-        for (j in iterador ){
-            if (teste == s[j] && i != j){
-                check = false
-                break
-            }
-        }
-    }
-    return check
+fun noRepeats(s: String): Boolean {
+    for (i in s.indices)
+        for (j in i + 1 until s.length)
+            if (s[i] == s[j]) return false
+    return true
 }
-
 
 fun allCorrect(result: String): Boolean{
-
-    var verificador = true
-    val tamanho = result.indices
-
-    for (i in tamanho){
-        if (result[i] != CORRECT) {
-            verificador = false
-            break }
-    }
-
-    return verificador
+    for(c in result)
+        if(c != CORRECT) return false
+    return true
 }
+
 
 fun readGuess(length: Int): String {
-    var palavrafinal: String
+    var guess: String
 
     do {
-       print("Palavra: ")
-       val s = readln()
-       palavrafinal = s.uppercase();
+        print("Palavra: ")
+        guess = readln().uppercase()
 
-        if (palavrafinal.length != length) {
-            println("Palavra inválida. Introduza uma palavra com exatamente $length letras.") }
+        if (guess.length != length || !guess.all { it in 'A'..'Z' }) {
+            println("Palavra inválida.")
+        }
 
-        } while (palavrafinal.length != length)
+    } while (guess.length != length || !guess.all { it in 'A'..'Z' })
 
-    return palavrafinal
+    return guess
 }
-
 
 fun getResult(secret: String, guess: String): String {
-    val res = CharArray(guess.length) { WRONG }
-    val used = BooleanArray(secret.length) { false }
-
-    for (i in guess.indices) {
-        if (guess[i] == secret[i]) {
-            res[i] = CORRECT
-            used[i] = true
+    var result = ""
+    for (i in guess.indices)
+        if(guess[i] == secret[i]) result += CORRECT
+        else{
+            var livres = 0
+            var usadas = 0
+            for (j in  secret.indices)
+                if(secret[j] == guess[i] && secret[j] != guess[j]) livres++
+            for (j in 0 until i)
+                if(guess[j] == guess[i] && guess[j] != secret[j]) usadas++
+            if(livres > usadas) result += SWAPPED
+            else result += WRONG
         }
-    }
-
-    for (i in guess.indices) {
-        if (res[i] != CORRECT) {
-            for (j in secret.indices) {
-                if (guess[i] == secret[j] && !used[j]) {
-                    res[i] = SWAPPED
-                    used[j] = true
-                    break
-                }
-            }
-        }
-    }
-
-    return String(res)
+    return result
 }
-
