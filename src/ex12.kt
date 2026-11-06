@@ -2,4 +2,9 @@
 
 fun main(){
 
+    print("Digite um numero:")
+    val n1 = readln().toInt()
+
+    if(n1 % 2 == 0) print("par") else print("impar")
+
 }
